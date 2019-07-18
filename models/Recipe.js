@@ -6,11 +6,7 @@ const recipeSchema = new Schema({
   level: {type: String,
           enum: ["Easy Peasy", "Amateur Chef", "UltraPro Chef"]
           }, 
-  ingredients: {type:Array,
-                quantity: String,
-                name: String,
-                type: String
-            },
+  ingredients: {type: Array},
   cuisine: String,
   dishType: {type: String,
             enum: ["Breakfast", "Dish", "Snack", "Drink", "Dessert", "Other"]
