@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Recipe = require('./models/Recipe'); // Import of the model Recipe from './models/Recipe'
 const data = require('./data.js');  // Import of the data from './data.js'
-
+const path = require('path');
+const express = require('express');
 // Connection to the database "recipeApp"
 mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
   .then(() => {
@@ -10,3 +11,44 @@ mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
     console.error('Error connecting to mongo', err);
   });
 
+
+
+const app = express(); //my own server named app, express server handling requests and responses
+app.use(express.static('public'))// everything inside publike will be available
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use("/", require("./routes/recipes"))
+
+
+const Recipes = require("./models/Recipe")
+
+app.get('/', (req, res, next) => {
+  Recipes.find({})
+    .then((recipes) => {
+      res.render('recipes.hbs', {
+        recipes
+      })
+    })
+    .catch(err => {
+      console.log('error' + err)
+    })
+})
+
+app.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
+  Recipes.findById(req.params.id)
+    .then((recipe) => {
+      res.render('recipeDetailed.hbs', {
+        recipe
+      })
+    })
+    .catch(err => {
+      console.log('error' + err)
+    })
+})
+
+app.listen(3000, () => {
+  console.log('My app listening on port 3000!')
+});
