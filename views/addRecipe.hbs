@@ -1,0 +1,26 @@
+<form action="/recipes/add" method="POST">
+  <input type="text" name="title" placeholder="Title of your recipe">
+  <label for="level">Level of difficulty</label>
+  <select name="level" id="">
+    <option value="Easy Peasy">Easy Peasy</option>
+    <option value="Amateur Chef">Amateur Chef</option>
+    <option value="UltraPro Chef">UltraPro Chef</option>
+  </select>
+  {{!-- <input type="text" name ="level" placeholder="Level of difficulty"> --}}
+  <input type="text" name="ingredients" placeholder="Ingeredients">
+  <input type="text" name="cuisine" placeholder= "Cuisine">
+  <label for="dishType">Chose a dish type</label>
+  <select name="dishType" id="">
+    <option value="Breakfast">Breakfast</option>
+    <option value="Dish">Dish</option>
+    <option value="Snack">Snack</option>
+    <option value="Drink">Drink</option>
+    <option value="Dessert">Dessert</option>
+    <option value="Other">Other</option>
+  </select>
+  <input type="href" name="image" placeholder="image_url">
+  <input type="number" name="duration" placeholder="Prep time">
+  <input type="text" name="creator" placeholder="Name of creator">
+  <input type="date" name="created" placeholder="Date of creation">
+  <button type="submit">Press Button to Add A Recipe</button>
+</form>

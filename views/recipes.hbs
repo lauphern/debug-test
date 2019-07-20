@@ -5,7 +5,10 @@
   <div class="flex-box">
     <img src="{{this.image}}" alt="">
     <h2><a href="/recipe/{{this.id}}">{{this.title}}</a></h2>
-    <a href="/recipe/{{this.id}}" <p>See more</p></a>
+    <a href="/recipe/{{this.id}}"><p>See more</p></a>
   </div>
+    <p>
+      <a class="edit-button" href="/recipes/edit?recipe_id={{this._id}}">EDIT</a>
+    </p>
   {{/each}}
 </div>
