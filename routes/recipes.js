@@ -22,8 +22,22 @@ router.get('/recipes', (req, res, next) => {
     })
 })
 
+// router.get('/recipes/edit', (req, res, next) => {
+//   Recipe.findOne({
+//       _id: req.query.recipe_id
+//     })
+//     .then((recipe) => {
+//       res.render('recipe-edit', {
+//         recipe
+//       });
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//     })
+// })
+
 router.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
-  Recipes.findById(req.params.id)
+  Recipes.findOne({_id: req.params.id})
     .then((recipe) => {
       res.render('recipeDetailed.hbs', {
         recipe
@@ -33,20 +47,22 @@ router.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
       console.log('error' + err)
     })
 })
+
 router.get('/recipes/edit', (req, res, next) => {
-  res.render("recipe-edit");
-})
-router.get('/recipes/edit', (req, res, next)=> {
-  Recipe.findOne({_title: req.query.recipe_title})
-    .then((recipe) =>{
-      res.render('recipe-edit', {recipe});
+  Recipes.findById(req.query.id)
+    .then((recipe) => {
+      res.render('recipe-edit.hbs', {
+        recipe
+      })
     })
-    .catch((error) =>{
-      console.log(error)
+    .catch(err => {
+      console.log('error' + err)
     })
-})
+    })
+  // find recipe with req.query.i d
+
 router.post('/recipes/edit', (req, res, next) => {
-  
+  debugger
   const {
     title,
     level,
@@ -58,25 +74,38 @@ router.post('/recipes/edit', (req, res, next) => {
     creator,
     created
   } = req.body;
-  Recipe.findByIdAndUpdate({
-    _id: req.query.recipe_id
-  }, { $set: {title,
-    level,
-    ingredients,
-    cuisine,
-    dishType,
-    image,
-    duration,
-    creator,
-    created
-  }})
+
+  Recipe.updateOne({_id: req.query.id}, {$set: {title, level, ingredients, cuisine, dishType, image, duration, creator, created }}, {new: true})
   .then((recipe) => {
-    res.redirect('/recipes');
+    res.redirect('/recipes')
   })
   .catch((error) => {
-    console.log(error)
-  })
+    console.log(error);
+  });
 });
+
+//   Recipe.findByIdAndUpdate({
+//     _id: req.query.recipe_id
+//   }, { $set: {title,
+//     level,
+//     ingredients,
+//     cuisine,
+//     dishType,
+//     image,
+//     duration,
+//     creator,
+//     created
+//   }})
+//   .then((recipe) => {
+//     res.redirect('/recipes');
+//   })
+//   .catch((error) => {
+//     console.log(error)
+//   })
+// })
+
+
+
 
 router.get('/recipes/add', (req, res, next) => {
   res.render("addRecipe");
@@ -107,7 +136,7 @@ router.post('/recipes/add', (req, res, next) => {
      creator,
      created
    })
-  newRecipe.save()
+  newRecipe.save(req.body)
     .then((recipe) => {
       res.render('addRecipe', {
         recipe
@@ -117,16 +146,5 @@ router.post('/recipes/add', (req, res, next) => {
       console.log('error' + err)
     })
 })
-//const Movie =require('../models/Movie.js')//reqiring schema
-
-//router.get('/movies/', (req, res, next) => {
-//Movie.find()
-//.then(movies =>{
-//res.render("movies", {movies})
-//   console.log(movies)
-// })
-// .catch(error => {
-//   console.log(error)
-// })})
 
 module.exports = router;

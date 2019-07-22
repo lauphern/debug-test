@@ -15,13 +15,12 @@ mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
     console.error('Error connecting to mongo', err);
   });
 
-
-
 const app = express(); //my own server named app, express server handling requests and responses
+
 app.use(express.static('public'))// everything inside publike will be available
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');//tell express app that hbs is in charge of rendering the html files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // bodyparser setup
