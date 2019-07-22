@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 
 
@@ -20,7 +21,7 @@ const recipeSchema = mongoose.model("recipes", new Schema({
         duration: {type: Number, 
                minimum: 0
              },
-        creator: String,
+        cook: {type: ObjectId, ref: "cooks"},
         created: {type: Date, 
            default: Date.now
            }

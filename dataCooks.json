@@ -1,0 +1,23 @@
+
+[
+{
+  "name": "Chef LePapu",
+  "cuisine": "Asian"
+  },
+  {
+  "name": "Chef John",
+  "cuisine": "American"
+  },
+  {
+  "name": "Chef Nadia",
+  "cuisine": "International"
+  },
+  {
+  "name": "Chef Luigi",
+  "cuisine": "Italian"
+  },
+  {
+  "name": "Chef Jennifer",
+  "cuisine": "French"
+  }
+]

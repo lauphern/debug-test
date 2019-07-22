@@ -71,11 +71,11 @@ router.post('/recipes/edit', (req, res, next) => {
     dishType,
     image,
     duration,
-    creator,
+    cook,
     created
   } = req.body;
 
-  Recipe.updateOne({_id: req.query.id}, {$set: {title, level, ingredients, cuisine, dishType, image, duration, creator, created }}, {new: true})
+  Recipe.updateOne({_id: req.query.id}, {$set: {title, level, ingredients, cuisine, dishType, image, duration, cook, created }}, {new: true})
   .then((recipe) => {
     res.redirect('/recipes')
   })
@@ -122,7 +122,7 @@ router.post('/recipes/add', (req, res, next) => {
      dishType,
      image,
      duration,
-     creator,
+     cook,
      created
    } = req.body;
    const newRecipe = new Recipe({
@@ -133,7 +133,7 @@ router.post('/recipes/add', (req, res, next) => {
      dishType,
      image,
      duration,
-     creator,
+     cook,
      created
    })
   newRecipe.save(req.body)

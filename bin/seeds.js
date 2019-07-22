@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost/recipeApp', {
         dishType: 'Dish',
         image: 'https://images.media-allrecipes.com/userphotos/720x405/815964.jpg',
         duration: 40,
-        creator: 'Chef LePapu'
+        cook: 'Chef LePapu'
       },
       {
         title: 'Orange and Milk-Braised Pork Carnitas',
@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost/recipeApp', {
         dishType: 'Dish',
         image: 'https://images.media-allrecipes.com/userphotos/720x405/2280918.jpg',
         duration: 160,
-        creator: 'Chef John'
+        cook: 'Chef John'
       },
       {
         title: 'Carrot Cake',
@@ -38,7 +38,7 @@ mongoose.connect('mongodb://localhost/recipeApp', {
         dishType: 'Dessert',
         image: 'https://images.media-allrecipes.com/userphotos/720x405/3605684.jpg',
         duration: 130,
-        creator: 'Chef Nadia'
+        cook: 'Chef Nadia'
       },
       {
         title: 'Rigatoni alla Genovese',
@@ -48,7 +48,7 @@ mongoose.connect('mongodb://localhost/recipeApp', {
         dishType: 'Dish',
         image: 'https://images.media-allrecipes.com/userphotos/720x405/3489951.jpg',
         duration: 220,
-        creator: 'Chef Luigi'
+        cook: 'Chef Luigi'
       },
       {
         title: 'Chocolate Chip Cookies',
@@ -58,7 +58,7 @@ mongoose.connect('mongodb://localhost/recipeApp', {
         dishType: 'Dish',
         image: 'https://images.media-allrecipes.com/userphotos/720x405/815964.jpg',
         duration: 30,
-        creator: 'Chef Jennifer'
+        cook: 'Chef Jennifer'
       }
     ];
 
