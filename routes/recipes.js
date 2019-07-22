@@ -62,7 +62,7 @@ router.get('/recipes/edit', (req, res, next) => {
   // find recipe with req.query.i d
 
 router.post('/recipes/edit', (req, res, next) => {
-  debugger
+  
   const {
     title,
     level,
@@ -144,6 +144,16 @@ router.post('/recipes/add', (req, res, next) => {
     })
     .catch(err => {
       console.log('error' + err)
+    })
+})
+
+router.get('/delete/:id', (req, res, next) => {
+  Recipe.findByIdAndRemove(req.params.id)
+    .then((recipe) => {
+      res.redirect('/recipes');
+    })
+    .catch((error) => {
+      console.log(error)
     })
 })
 
