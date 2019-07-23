@@ -3,7 +3,7 @@
     <a href="/recipes">
       <p class="backLink">Go back</p>
     </a>
-    <a href="/recipes/edit?id={{recipe._id}}">
+    <a href="/recipes/edit/{{recipe._id}}">
       <p>Edit</p>
     </a>
     <a href="/delete/{{recipe._id}}">
@@ -20,7 +20,7 @@
     <h4>Dish Type: {{recipe.dishType}}</h4>
     <img src="{{recipe.image}}" alt="">
     <p>Duration time :{{recipe.duration}}</p>
-    <p>Created by: {{recipe.creator}}</p>
+    <p>Created by: {{recipe.creator.name}}</p>
     <p>Created on: {{recipe.created}}</p>
   </div>
 </div>
