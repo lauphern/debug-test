@@ -20,3 +20,5 @@ router.post('/cooks/add', (req, res, next) => {
   console.log(error)
 })
 })
+
+module.exports = router;

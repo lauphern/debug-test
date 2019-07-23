@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const cookSchema = new Shema({
+const cookSchema = new Schema({
   name: String,
   cuisine: String
 });

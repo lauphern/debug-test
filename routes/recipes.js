@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Recipe = require('../models/Recipe'); 
+const Cook = require('../models/Cook');
+const mongoose = require('mongoose');
 
 /* GET home page */
 router.get('/', (req, res, next) => { //navigation througt the pages that we are going to have
@@ -12,6 +14,7 @@ const Recipes = require("../models/Recipe.js")
 
 router.get('/recipes', (req, res, next) => {
   Recipes.find({})
+  .populate("cook")
     .then((recipes) => {
       res.render('recipes.hbs', {
         recipes
@@ -21,92 +24,101 @@ router.get('/recipes', (req, res, next) => {
       console.log('error' + err)
     })
 })
+  router.get("/recipes/add", (req, res) => {
+    Cook.find({})
+      .then((cooks) => {
+        res.render("addRecipe", {cooks})
+      })
+      .catch((err) => {
+        next()
+      })
+    })
 
-// router.get('/recipes/edit', (req, res, next) => {
-//   Recipe.findOne({
-//       _id: req.query.recipe_id
-//     })
-//     .then((recipe) => {
-//       res.render('recipe-edit', {
-//         recipe
-//       });
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
-// })
-
+  router.post("recipes/add", (req, res) => {
+    let newRecipe = {
+      title: req.body.title,
+      level: req.body.level,
+      ingredients: req.body.ingredients,
+      cuisine: req.body.cuisine,
+      dishType: req.body.dishType,
+      image: req.body.image,
+      duration: req.body.duration,
+      creator: mongoose.Types.ObjectId(req.body.creator),
+      created: req.body.created
+    }
+    Recipe.create(newRecipe)
+    .then((recipe) => {
+      res.redirect(`/recipes/${recipe._id}`)
+    })
+  })
+// EDIT
 router.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
   Recipes.findOne({_id: req.params.id})
+  .populate("cook")
     .then((recipe) => {
       res.render('recipeDetailed.hbs', {
         recipe
       })
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('error' + err)
+      next ()
     })
 })
 
+
 router.get('/recipes/edit', (req, res, next) => {
   Recipes.findById(req.query.id)
+    .populate("cook")
     .then((recipe) => {
-      res.render('recipe-edit.hbs', {
-        recipe
-      })
+      Cook.find({})
+        .then((allCooks)=> {
+          res.render('recipe-edit.hbs', {
+          recipe, allCooks })
     })
-    .catch(err => {
+  })
+    .catch((err)=> {
       console.log('error' + err)
+      next()
     })
     })
   // find recipe with req.query.i d
 
 router.post('/recipes/edit', (req, res, next) => {
-  
-  const {
-    title,
-    level,
-    ingredients,
-    cuisine,
-    dishType,
-    image,
-    duration,
-    cook,
-    created
-  } = req.body;
+  const updateRecipe = {
+    title: req.body.title,
+    level: req.body.level,
+    ingredients: req.body.ingredients,
+    cuisine: req.body.cuisine,
+    dishType:req.body.dishType,
+    image: req.body.image,
+    duration: req.body.duration,
+    creator: mongoose.Types.ObjectId(req.body.creator),
+    created: req.body.created
+  }
 
-  Recipe.updateOne({_id: req.query.id}, {$set: {title, level, ingredients, cuisine, dishType, image, duration, cook, created }}, {new: true})
+  // const {
+  //   title,
+  //   level,
+  //   ingredients,
+  //   cuisine,
+  //   dishType,
+  //   image,
+  //   duration,
+  //   creator,
+  //   created
+  // } = req.body;
+  Recipe.findByIdAndUpdate(req.params.id, updateRecipe), {new: true}
+  // Recipe.updateOne({_id: req.query.id}, {$set: {title, level, ingredients, cuisine, dishType, image, duration, creator, created }}, {new: true})
   .then((recipe) => {
-    res.redirect('/recipes')
+    res.redirect(`/recipes/${req.params.id}`)
   })
   .catch((error) => {
     console.log(error);
+    next()
   });
 });
-
-//   Recipe.findByIdAndUpdate({
-//     _id: req.query.recipe_id
-//   }, { $set: {title,
-//     level,
-//     ingredients,
-//     cuisine,
-//     dishType,
-//     image,
-//     duration,
-//     creator,
-//     created
-//   }})
-//   .then((recipe) => {
-//     res.redirect('/recipes');
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//   })
-// })
-
-
-
-
+// ADD
 router.get('/recipes/add', (req, res, next) => {
   res.render("addRecipe");
 })
@@ -122,7 +134,7 @@ router.post('/recipes/add', (req, res, next) => {
      dishType,
      image,
      duration,
-     cook,
+     creator,
      created
    } = req.body;
    const newRecipe = new Recipe({
@@ -133,7 +145,7 @@ router.post('/recipes/add', (req, res, next) => {
      dishType,
      image,
      duration,
-     cook,
+     creator,
      created
    })
   newRecipe.save(req.body)

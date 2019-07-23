@@ -21,7 +21,7 @@ const recipeSchema = mongoose.model("recipes", new Schema({
         duration: {type: Number, 
                minimum: 0
              },
-        cook: {type: ObjectId, ref: "cooks"},
+        creator: {type: ObjectId, ref: "cooks"},
         created: {type: Date, 
            default: Date.now
            }

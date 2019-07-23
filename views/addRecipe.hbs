@@ -20,7 +20,11 @@
   </select>
   <input type="url" name="image" placeholder="image_url">
   <input type="number" name="duration" placeholder="Prep time in min">
-  <input type="text" name="cook" placeholder="Name of cook">
+  <select name="creator" id="">
+    {{#each cooks}}
+      <option value="{{_id}}">{{name}}</option>
+    {{/each}}
+  </select>
   <input type="date" name="created" placeholder="Date of creation">
   <button type="submit">Press Button to Add A Recipe</button>
 </form>
