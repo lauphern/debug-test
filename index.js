@@ -7,11 +7,17 @@ const path = require('path');
 const express = require('express');
 
 const session = require('express-session');
+const MongoStore = require("connect-mongo")(session);
 
 const app = express(); //my own server named app, express server handling requests and responses
 
 app.use(session({
   secret: 'super secret',
+  cookie: {maxAge: 60000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 // 1day
+  }),
   resave: false,
   saveUninitialized: true,
 }))

@@ -84,7 +84,7 @@ router.get('/recipes/edit', (req, res, next) => {
       next()
     })
     })
-  // find recipe with req.query.i d
+  // find recipe with req.query.id
 
 router.post('/recipes/edit/:id', (req, res, next) => {
   const updateRecipe = {
