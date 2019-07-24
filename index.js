@@ -5,7 +5,16 @@ const bodyParser = require('body-parser');
 // const data = require('./data.js');  // Import of the data from './data.js'
 const path = require('path');
 const express = require('express');
-const router = express.Router();
+
+const session = require('express-session');
+
+const app = express(); //my own server named app, express server handling requests and responses
+
+app.use(session({
+  secret: 'super secret',
+  resave: false,
+  saveUninitialized: true,
+}))
 
 // Connection to the database "recipeApp"
 mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
@@ -15,7 +24,7 @@ mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
     console.error('Error connecting to mongo', err);
   });
 
-const app = express(); //my own server named app, express server handling requests and responses
+
 
 app.use(express.static('public'))// everything inside publike will be available
 
@@ -30,6 +39,7 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use("/", require("./routes/recipes"))
+app.use("/users", require("./routes/users"))
 
 
 // const Recipes = require("./models/Recipe.js")

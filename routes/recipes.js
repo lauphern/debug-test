@@ -57,7 +57,7 @@ router.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
   Recipes.findOne({_id: req.params.id})
   .populate("creator")
     .then((recipe) => {
-     debugger
+    
       res.render('recipeDetailed.hbs', {
         recipe
       })
