@@ -45,11 +45,14 @@ app.use(bodyParser.urlencoded({
 //NEW
 // defining custom route protection middleware
 let protectRoute = function(req, res, next) {
-  if(req.session.user) next();
-  else {
-    res.redirect("/users/login")
-  }
-}
+  
+  if (req.session.user) { //changed!!!!
+  res.redirect("/users/login")
+  }else {
+    next()
+   }
+ }
+
 app.use("/", require("./routes/home"))
 app.use("/users", protectRoute, require("./routes/users"))
 app.use("/", protectRoute, require("./routes/recipes"))

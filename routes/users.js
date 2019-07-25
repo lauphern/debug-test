@@ -6,6 +6,7 @@ var bcrypt = require('bcrypt');
 
 
 router.get('/register', (req, res, next) => {
+  
   res.render('register.hbs');
 });
 
@@ -30,6 +31,7 @@ router.post('/register', (req, res, next) => {
 });
 
 router.get('/login', function (req, res, next) {
+  debugger
   res.render('login.hbs')
 });
 
