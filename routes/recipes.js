@@ -9,7 +9,7 @@ const Recipes = require("../models/Recipe.js")
 
 router.get('/recipes', (req, res, next) => {
   Recipes.find({})
-  .populate("creator")
+  .populate("cooks")
     .then((recipes) => {//new information received from mongoose
       res.render('recipes.hbs', { recipes })
     })
@@ -54,7 +54,7 @@ router.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
     .then((recipe) => {
     
       res.render('recipeDetailed.hbs', {
-        recipe
+        recipes
       })
     })
     .catch((err) => {

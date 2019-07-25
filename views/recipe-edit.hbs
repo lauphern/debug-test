@@ -1,4 +1,4 @@
-<form action="/recipes/edit/{{recipe._id}}" method="POST">
+<form action="/recipes/edit?id={{recipe._id}}" method="POST">
   <input type="text" name="title" value="{{recipe.title}}" placeholder="Title of your recipe">
   <label for="level">Level of difficulty</label>
   <select name="level" id="">
@@ -22,7 +22,7 @@
   <label for="creator">Choose a cook</label>
   <select name="creator" id="">
     {{#each allCooks}}
-      <option value="{{_id}}">{{name}}</option>
+      <option value="{{allCooks._id}}">{{allCooks.name}}</option>
     {{/each}}
   </select>
   <input type="date" name="created" value="{{recipe.created}}" placeholder="Date of creation">

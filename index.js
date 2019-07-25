@@ -21,7 +21,7 @@ app.use(session({
 }))
 
 // Connection to the database "recipeApp"
-mongoose.connect('mongodb://localhost/recipeApp', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/starter-code', { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to Mongo!');
   }).catch(err => {
@@ -51,7 +51,7 @@ let protectRoute = function(req, res, next) {
   }
 }
 app.use("/", require("./routes/home"))
-app.use("/users", require("./routes/users"))
+app.use("/users", protectRoute, require("./routes/users"))
 app.use("/", protectRoute, require("./routes/recipes"))
 
 
