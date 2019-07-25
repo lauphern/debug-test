@@ -4,11 +4,6 @@ const Recipe = require('../models/Recipe');
 const Cook = require('../models/Cook');
 const mongoose = require('mongoose');
 
-/* GET home page */
-router.get('/', (req, res, next) => { //navigation througt the pages that we are going to have
-  res.render('index');
-});
-
 
 const Recipes = require("../models/Recipe.js")
 

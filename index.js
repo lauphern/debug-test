@@ -42,8 +42,17 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 
-app.use("/", require("./routes/recipes"))
+//NEW
+// defining custom route protection middleware
+let protectRoute = function(req, res, next) {
+  if(req.session.user) next();
+  else {
+    res.redirect("/users/login")
+  }
+}
+app.use("/", require("./routes/home"))
 app.use("/users", require("./routes/users"))
+app.use("/", protectRoute, require("./routes/recipes"))
 
 
 app.listen(3000, () => {
