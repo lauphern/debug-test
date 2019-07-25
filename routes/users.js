@@ -65,7 +65,6 @@ router.get("/logout", (req, res) => {
 router.get("/profile", (req, res) => {
   if (req.session.user) {
     res.render('profile.hbs')
-    //res.send(`Welcome to your profile page ${req.session.user.username}`  )
   } else {
     res.redirect("/users/login")
   }

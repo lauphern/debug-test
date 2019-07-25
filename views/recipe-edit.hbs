@@ -6,7 +6,6 @@
     <option value="Amateur Chef">Amateur Chef</option>
     <option value="UltraPro Chef">UltraPro Chef</option>
   </select>
-  {{!-- <input type="text" name ="level" placeholder="Level of difficulty"> --}}
   <input type="text" name="ingredients" value="{{recipe.ingredients}}" placeholder="Ingeredients">
   <input type="text" name="cuisine" value="{{recipe.cuisine}}" placeholder="Cuisine">
   <label for="dishType">Choose a dish type</label>
@@ -27,6 +26,5 @@
     {{/each}}
   </select>
   <input type="date" name="created" value="{{recipe.created}}" placeholder="Date of creation">
-  {{!-- <button action="/recipes/update?id={{recipe._id}}" type="submit">update</button> --}}
   <button type="submit">update</button>
 </form>

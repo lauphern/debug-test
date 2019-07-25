@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-// const Recipe = require('./models/Recipe'); // Import of the model Recipe from './models/Recipe'
-// const data = require('./data.js');  // Import of the data from './data.js'
 const path = require('path');
 const express = require('express');
 
@@ -47,58 +45,6 @@ app.use(bodyParser.urlencoded({
 app.use("/", require("./routes/recipes"))
 app.use("/users", require("./routes/users"))
 
-
-// const Recipes = require("./models/Recipe.js")
-
-// app.get('/recipes', (req, res, next) => {
-//   Recipes.find({})
-//     .then((recipes) => {
-//       res.render('recipes.hbs', {
-//         recipes
-//       })
-//     })
-//     .catch(err => {
-//       console.log('error' + err)
-//     })
-// })
-
-// app.get("/recipe/:id", (req, res, next) => { //params : //insted of query ?
-//   Recipes.findById(req.params.id)
-//     .then((recipe) => {
-//       res.render('recipeDetailed.hbs', {
-//         recipe
-//       })
-//     })
-//     .catch(err => {
-//       console.log('error' + err)
-//     })
-// })
-// app.get('/recipes/add', (req, res, next) =>{
-//   res.render("addRecipe");
-// })
-// router.post('/recipes/add', (req, res, next) => {
-//   const {title, level, ingredients, cuisine, dishType, image, duration, creator, created} = req.body;
-//   const newRecipe = new Recipe({
-//     title,
-//     level,
-//     ingredients,
-//     cuisine,
-//     dishType,
-//     image,
-//     duration,
-//     creator,
-//     created
-//   })
-//   newRecipe.save()
-//     .then((recipe) => {
-//         res.render('addRecipe', {
-//           recipe
-//         })
-//       })
-//       .catch(err => {
-//         console.log('error' + err)
-//       })
-// })
 
 app.listen(3000, () => {
   console.log('My app listening on port 3000!')

@@ -99,18 +99,6 @@ router.post('/recipes/edit/:id', (req, res, next) => {
     created: req.body.created
   }
 
-  // const {
-  //   title,
-  //   level,
-  //   ingredients,
-  //   cuisine,
-  //   dishType,
-  //   image,
-  //   duration,
-  //   creator,
-  //   created
-  // } = req.body;
-  // Recipe.findByIdAndUpdate(req.params.id, updateRecipe, {new: true})
   Recipe.updateOne({_id: req.params.id}, updateRecipe, {new: true})
   .then(() => {
     res.redirect("/recipes")
@@ -120,46 +108,7 @@ router.post('/recipes/edit/:id', (req, res, next) => {
     next()
   });
 });
-// ADD
-// router.get('/recipes/add', (req, res, next) => {
-//   res.render("addRecipe");
-// })
 
-// router.post('/recipes/add', (req, res, next) => {
-//   console.log('req.body', req.body)
-  
-//    const {
-//      title,
-//      level,
-//      ingredients,
-//      cuisine,
-//      dishType,
-//      image,
-//      duration,
-//      creator,
-//      created
-//    } = req.body;
-//    const newRecipe = new Recipe({
-//      title,
-//      level,
-//      ingredients,
-//      cuisine,
-//      dishType,
-//      image,
-//      duration,
-//      creator,
-//      created
-//    })
-//   newRecipe.save(req.body)
-//     .then((recipe) => {
-//       res.render('addRecipe', {
-//         recipe
-//       })
-//     })
-//     .catch(err => {
-//       console.log('error' + err)
-//     })
-// })
 
 router.get('/delete/:id', (req, res, next) => {
   Recipe.findByIdAndRemove(req.params.id)
